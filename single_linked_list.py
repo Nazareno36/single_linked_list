@@ -107,3 +107,18 @@ class SingleLinkedList:
                 self.len -= 1
             else:
                 print('Index out of range')
+    
+    def insert_node(self,index,value):
+        if index == 1:
+            self.unshift(value)
+        elif index == self.len+1:
+            self.push_back(value)
+        else:
+            previous_node = self.get_node_at(index)
+            if previous_node != None:
+                index_node = previous_node.next
+                previous_node.next = self.Node(value)
+                previous_node.next.next = index_node
+                self.len += 1
+            else:
+                print('Index out of range')
