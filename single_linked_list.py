@@ -60,11 +60,12 @@ class SingleLinkedList:
             self.len-=1
         elif self.head != None:
             current_node = self.head
-            for i in range(self.len-2):
+            while current_node.next != None:
+                previos_node = current_node
                 current_node = current_node.next
-            self.tail = current_node
-            self.tail.next = None
-            self.len -=1
+            previos_node.next = None
+            self.tail = previos_node
+            self.len -= 1
     
     def get_node_at(self,index):
         if index == self.len:
@@ -114,7 +115,7 @@ class SingleLinkedList:
         elif index == self.len+1:
             self.push_back(value)
         else:
-            previous_node = self.get_node_at(index)
+            previous_node = self.get_node_at(index-1)
             if previous_node != None:
                 index_node = previous_node.next
                 previous_node.next = self.Node(value)
@@ -122,3 +123,11 @@ class SingleLinkedList:
                 self.len += 1
             else:
                 print('Index out of range')
+    
+    def reverse(self):
+        counter = 1
+        while counter <  self.len:
+            self.insert_node(counter,self.tail.value)
+            self.pop_node()
+            counter+=1
+    
